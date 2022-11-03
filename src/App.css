@@ -1,78 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-  }
-
-  *, ::after, ::before {
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: "Roboto", sans-serif;
-    height: 100vh;
-  }
-
-  .cardsContainer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      
-  }
-
-  .weatherCard {
-    margin-top: 3rem;
-    text-align: center;
-    min-width: 380px;
-    height: 270px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    -webkit-box-shadow: 4px 4px 5px 2px rgba(13, 17, 21, 0.2);
-    -moz-box-shadow: 4px 4px 5px 2px rgba(13, 17, 21, 0.2);
-    box-shadow: 4px 4px 5px 2px rgba(13, 17, 21, 0.2);  
-    border: 1px solid rgba(13, 17, 21, 0.2);
-    border-radius: 0.5rem;
-  }
-
-  .weatherCard>p {
-    padding-bottom: 1rem;
-  }
-
-  .weatherCard>p:first-child {
-    font-weight: bold;
-  }
-
-.btn {
-  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  overflow-x:hidden;
 }
 
-.btn>button {
-  margin: 0 1rem 0 1rem;
-  color: #fff;
-  text-decoration: none;
-  user-select: none;
-  padding: .4em 1em;
-  border: 1 solid #596068;
-  outline: none; 
-  border: none;
-  cursor: pointer;
+*,
+::after,
+::before {
+  box-sizing: border-box;
 }
 
-.btn>button:first-child {
-  background: rgb(152,15,0);
+body {
+  font-family: "Roboto", sans-serif;
+  height: 100vh;
 }
-
-.btn>button:first-child:hover { background: rgb(197, 75, 59); }
-
-.btn>button:first-child:active { background: rgb(100, 13, 4); }
-
-.btn>button:last-child {
-  background: rgb(30, 134, 16);
-}
-
-.btn>button:last-child:hover { background: rgb(82, 146, 73); }
-
-.btn>button:last-child:active { background: rgb(13, 66, 6); }
