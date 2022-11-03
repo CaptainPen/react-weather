@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "./components/form";
 import Weather from "./components/weather";
 import "./App.css";
 
 const API_KEY = "f901b49665f1c1a7425f470ce9d5cd44";
 
-class App extends React.Component {
-  state = {
-    city: undefined,
-    temp: undefined,
-    humidity: undefined,
-    pressure: undefined,
-    speed: undefined,
-    deg: undefined,
-    dt: undefined,
+const App = () => {
+  const [arr, setArr] = useState(JSON.parse(localStorage.getItem(`arr`)) || []);
+
+  const addWeather = async (e) => {
+    e.preventDefault();
+    const cityName = e.target.elements.city.value;
+    const weatherData = await gettingWeather(cityName);
+    arr.push(weatherData);
+    arr.sort((a, b) => b.tempRange - a.tempRange);
+    setArr([...arr]);
+    setWeatherLocalStorage(arr);
   };
 
-  arr = [];
-
-  gettingWeather = async (e) => {
-    e.preventDefault();
-    const city = e.target.elements.city.value;
+  const gettingWeather = async (cityName) => {
+    const city = cityName;
     let weatherIcon = "";
     let windDirection = "";
 
@@ -33,28 +32,17 @@ class App extends React.Component {
       getWeatherIcon();
       getWindDirection();
 
-      this.setState({
-        city: data.name,
-        temp: Math.round(data.main.temp) + "°С" + weatherIcon,
-        humidity: data.main.humidity + "%",
-        pressure: data.main.pressure,
-        speed: data.wind.speed + "М/С - " + windDirection,
-        deg: data.wind.deg,
-        dt: getDateUpdate(),
-      });
-
       let obj = {
         city: data.name,
         temp: Math.round(data.main.temp) + "°С" + weatherIcon,
+        tempRange: data.main.temp,
         humidity: data.main.humidity + "%",
         pressure: data.main.pressure,
         speed: data.wind.speed + "М/С - " + windDirection,
         deg: data.wind.deg,
         dt: getDateUpdate(),
+        id: data.id,
       };
-
-      this.arr.push(obj);
-      localStorage.setItem("arr", JSON.stringify(this.arr));
 
       function getWeatherIcon() {
         if (data.main.temp >= 0) {
@@ -87,8 +75,7 @@ class App extends React.Component {
       function getDateUpdate() {
         let dt = data.dt;
         let date = new Date();
-
-        date.setTime(dt);
+        console.log(date);
 
         let hours = date.getHours();
         let minutes = date.getMinutes();
@@ -109,38 +96,50 @@ class App extends React.Component {
         const dt_date = hours + ":" + minutes + ":" + seconds;
         return dt_date;
       }
+      return obj;
     }
   };
 
-  render() {
-    /* localStorage */
-    let localStorageArr = localStorage.getItem("arr");
-    if (localStorage.length > 0) {
-      console.log(`work`);
-      this.arr = JSON.parse(localStorageArr);
-    }
+  const handleClickDelete = (id) => {
+    console.log(id);
+    const filterArr = arr.filter((obj) => obj.id !== id);
+    setWeatherLocalStorage(filterArr);
+    setArr(filterArr);
+  };
 
-    return (
-      <div id="weatherApp" className="weatherApp">
-        <Form weatherMethod={this.gettingWeather} />
-        <div id="cardsContainer" className="cardsContainer">
-          {this.arr.map((obj, index) => (
-            <Weather
-              key={index}
-              city={this.arr[index].city}
-              temp={this.arr[index].temp}
-              humidity={this.arr[index].humidity}
-              pressure={this.arr[index].pressure}
-              speed={this.arr[index].speed}
-              deg={this.arr[index].deg}
-              dt={this.arr[index].dt}
-              onClick={() => console.log(obj)}
-            />
-          ))}
-        </div>
+  const refresh = async (city) => {
+    console.log(city);
+    const updateWeather = await gettingWeather(city);
+    const updateArrData = arr.map((item) => {
+      if ((item.city = city)) {
+        item = updateWeather;
+      }
+      return item;
+    });
+    setWeatherLocalStorage(updateArrData);
+    setArr(updateArrData);
+    console.log(updateArrData);
+  };
+
+  const setWeatherLocalStorage = (weatherData) => {
+    localStorage.setItem(`arr`, JSON.stringify(weatherData));
+  };
+
+  return (
+    <div id="weatherApp" className="weatherApp">
+      <Form weatherMethod={addWeather} />
+      <div id="cardsContainer" className="cardsContainer">
+        {arr.map((obj, index) => (
+          <Weather
+            key={index}
+            obj={obj}
+            refresh={refresh}
+            onDelete={handleClickDelete}
+          />
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;
