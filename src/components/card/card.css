@@ -7,8 +7,7 @@
 }
 
 .weatherCard {
-  margin-top: 3rem;
-  text-align: center;
+  margin: 3rem 0 3rem 0;
   min-width: 380px;
   height: 270px;
   display: flex;
@@ -29,6 +28,7 @@
   }
 
   .weatherCard {
+    margin: 2rem 0 0 0;
     min-width: 350px;
     border-radius: none;
   }

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import Form from "./components/form";
-import Weather from "./components/weather";
+import Form from "./components/form/form";
+import Card from "./components/card/card";
 import "./App.css";
 
-const API_KEY = "f901b49665f1c1a7425f470ce9d5cd44";
-
 const App = () => {
+  /* const API_KEY = "f901b49665f1c1a7425f470ce9d5cd44"; */
+  const API_KEY = "1340c1b61c42d543c0ee862d22a1b2b5";
+
   const [arr, setArr] = useState(JSON.parse(localStorage.getItem(`arr`)) || []);
 
   const addWeather = async (e) => {
@@ -16,6 +17,7 @@ const App = () => {
     arr.sort((a, b) => b.tempRange - a.tempRange);
     setArr([...arr]);
     setWeatherLocalStorage(arr);
+    console.log(arr);
   };
 
   const gettingWeather = async (cityName) => {
@@ -75,7 +77,6 @@ const App = () => {
       function getDateUpdate() {
         let dt = data.dt;
         let date = new Date();
-        console.log(date);
 
         let hours = date.getHours();
         let minutes = date.getMinutes();
@@ -101,25 +102,28 @@ const App = () => {
   };
 
   const handleClickDelete = (id) => {
-    console.log(id);
     const filterArr = arr.filter((obj) => obj.id !== id);
     setWeatherLocalStorage(filterArr);
     setArr(filterArr);
   };
 
   const refresh = async (city) => {
-    console.log(city);
     const updateWeather = await gettingWeather(city);
     const updateArrData = arr.map((item) => {
-      if ((item.city = city)) {
+      if (item.city == city) {
         item = updateWeather;
       }
       return item;
     });
     setWeatherLocalStorage(updateArrData);
     setArr(updateArrData);
-    console.log(updateArrData);
   };
+
+  const refreshAll = async () =>
+    await arr.map((item) => {
+      console.log(`Обновление для ${item.dt}`);
+      refresh(item.city);
+    });
 
   const setWeatherLocalStorage = (weatherData) => {
     localStorage.setItem(`arr`, JSON.stringify(weatherData));
@@ -127,10 +131,10 @@ const App = () => {
 
   return (
     <div id="weatherApp" className="weatherApp">
-      <Form weatherMethod={addWeather} />
+      <Form weatherMethod={addWeather} refreshAll={refreshAll} />
       <div id="cardsContainer" className="cardsContainer">
         {arr.map((obj, index) => (
-          <Weather
+          <Card
             key={index}
             obj={obj}
             refresh={refresh}

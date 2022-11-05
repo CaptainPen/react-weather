@@ -3,7 +3,7 @@
 * {
   margin: 0;
   padding: 0;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 *,
@@ -15,4 +15,11 @@
 body {
   font-family: "Roboto", sans-serif;
   height: 100vh;
+}
+
+input[type="text"] {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
 }
