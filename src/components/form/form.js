@@ -20,7 +20,8 @@ const Form = ({ weatherMethod, refreshAll }) => {
   };
 
   const filterCitys = citys.city.filter((city) => {
-    return city.name.toLowerCase().includes(value.toLocaleLowerCase());
+    const result = value.charAt(0).toUpperCase() + value.slice(1);
+    return city.name.includes(result);
   });
 
   return (
@@ -37,7 +38,7 @@ const Form = ({ weatherMethod, refreshAll }) => {
           onChange={inputValue}
           onClick={inputClick}
         />
-        <ul className="autocomplete">
+        <ul className="autocomplete" onClick={weatherMethod}>
           {isOpen && value && value.length > 2
             ? filterCitys.map((citys) => {
                 return (
@@ -55,11 +56,7 @@ const Form = ({ weatherMethod, refreshAll }) => {
       </form>
       <div className="updateForm">
         <p>Автообновление 5с</p>
-        <input
-          className="checkUpdate"
-          type="checkbox"
-          onClick={refreshAll}
-        ></input>
+        <input className="checkUpdate" type="checkbox"></input>
       </div>
     </div>
   );
