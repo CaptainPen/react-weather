@@ -119,6 +119,8 @@ const App = () => {
     setArr(updateArrData);
   };
 
+  /* Обновление всех карточек */
+
   const refreshAll = async () =>
     await arr.map((item) => {
       console.log(`Обновление для ${item.dt}`);
