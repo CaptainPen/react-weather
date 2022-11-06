@@ -7,7 +7,7 @@
 
 .textFieldInput {
   height: calc(2.25rem + 2px);
-  padding-left: 5%;
+  padding-left: 10px;
   color: #212529;
   background-color: #fff;
   border: 1px solid #bdbdbd;
@@ -16,7 +16,6 @@
 }
 
 .textFieldInput::placeholder {
-  padding-left: 5%;
   color: #212529;
   opacity: 0.4;
 }
@@ -25,7 +24,7 @@
   backdrop-filter: grayscale(40%) blur(1.5px);
   background: rgba(199, 199, 199, 0.301);
   max-height: 40vh;
-  width: 184px;
+  width: 194px;
   list-style: none;
   position: absolute;
   z-index: 1;

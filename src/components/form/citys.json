@@ -13,24 +13,6 @@
     "name": "Бендиго"
     },
     {
-    "city_id": "8",
-    "country_id": "4",
-    "region_id": "5",
-    "name": "Варрнамбул"
-    },
-    {
-    "city_id": "9",
-    "country_id": "4",
-    "region_id": "5",
-    "name": "Водонга"
-    },
-    {
-    "city_id": "10",
-    "country_id": "4",
-    "region_id": "5",
-    "name": "Гилонг"
-    },
-    {
     "city_id": "11",
     "country_id": "4",
     "region_id": "5",
@@ -41,12 +23,6 @@
     "country_id": "4",
     "region_id": "5",
     "name": "Мельбурн"
-    },
-    {
-    "city_id": "13",
-    "country_id": "4",
-    "region_id": "5",
-    "name": "Милдура"
     },
     {
     "city_id": "14",
@@ -145,12 +121,6 @@
     "name": "Маунт-Иса"
     },
     {
-    "city_id": "32",
-    "country_id": "4",
-    "region_id": "23",
-    "name": "Рокхамптон"
-    },
-    {
     "city_id": "33",
     "country_id": "4",
     "region_id": "23",
@@ -187,12 +157,6 @@
     "name": "Брокен-Хилл"
     },
     {
-    "city_id": "40",
-    "country_id": "4",
-    "region_id": "35",
-    "name": "Вагга-Вагга"
-    },
-    {
     "city_id": "41",
     "country_id": "4",
     "region_id": "35",
@@ -211,34 +175,10 @@
     "name": "Дуббо-Дуббо"
     },
     {
-    "city_id": "44",
-    "country_id": "4",
-    "region_id": "35",
-    "name": "Коффс-Харбор"
-    },
-    {
-    "city_id": "45",
-    "country_id": "4",
-    "region_id": "35",
-    "name": "Куэнбиан"
-    },
-    {
-    "city_id": "46",
-    "country_id": "4",
-    "region_id": "35",
-    "name": "Лисмор"
-    },
-    {
-    "city_id": "47",
-    "country_id": "4",
-    "region_id": "35",
-    "name": "Ньюкастл"
-    },
-    {
     "city_id": "48",
     "country_id": "4",
     "region_id": "35",
-    "name": "Оранж"
+    "name": ""
     },
     {
     "city_id": "49",
@@ -719,12 +659,6 @@
     "country_id": "81",
     "region_id": "82",
     "name": "Маштага"
-    },
-    {
-    "city_id": "142",
-    "country_id": "81",
-    "region_id": "82",
-    "name": "Мингечаур"
     },
     {
     "city_id": "143",
@@ -3889,12 +3823,6 @@
     "name": "Ньюпорт"
     },
     {
-    "city_id": "763",
-    "country_id": "616",
-    "region_id": "617",
-    "name": "Минск"
-    },
-    {
     "city_id": "764",
     "country_id": "616",
     "region_id": "617",
@@ -6071,12 +5999,6 @@
     "country_id": "1012",
     "region_id": "1152",
     "name": "Марл"
-    },
-    {
-    "city_id": "1183",
-    "country_id": "1012",
-    "region_id": "1152",
-    "name": "Минден"
     },
     {
     "city_id": "1184",
@@ -11851,12 +11773,6 @@
     "name": "Кош-Дебе"
     },
     {
-    "city_id": "2333",
-    "country_id": "2303",
-    "region_id": "2327",
-    "name": "Мин-Куш"
-    },
-    {
     "city_id": "2334",
     "country_id": "2303",
     "region_id": "2327",
@@ -15017,12 +14933,6 @@
     "country_id": "2897",
     "region_id": "2958",
     "name": "Легионово"
-    },
-    {
-    "city_id": "2969",
-    "country_id": "2897",
-    "region_id": "2958",
-    "name": "Минск-Мазовецки"
     },
     {
     "city_id": "2970",
@@ -52465,12 +52375,6 @@
     "name": "Опа-Лока"
     },
     {
-    "city_id": "9372",
-    "country_id": "5681",
-    "region_id": "9185",
-    "name": "Оранж-Парк"
-    },
-    {
     "city_id": "9373",
     "country_id": "5681",
     "region_id": "9185",
@@ -55351,12 +55255,6 @@
     "name": "Литин"
     },
     {
-    "city_id": "9928",
-    "country_id": "9908",
-    "region_id": "9909",
-    "name": "Могилев-Подольский"
-    },
-    {
     "city_id": "9929",
     "country_id": "9908",
     "region_id": "9909",
@@ -56843,12 +56741,6 @@
     "country_id": "9908",
     "region_id": "10165",
     "name": "Киев"
-    },
-    {
-    "city_id": "10185",
-    "country_id": "9908",
-    "region_id": "10165",
-    "name": "Киевская"
     },
     {
     "city_id": "10186",
@@ -60311,12 +60203,6 @@
     "country_id": "10668",
     "region_id": "10851",
     "name": "Бювэ"
-    },
-    {
-    "city_id": "10854",
-    "country_id": "10668",
-    "region_id": "10853",
-    "name": "Брест"
     },
     {
     "city_id": "10855",

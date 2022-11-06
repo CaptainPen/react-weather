@@ -11,7 +11,7 @@ const Card = ({ obj, onDelete, refresh }) => {
       <p>Влажность: {humidity}</p>
       <p>Атмосферное давление: {pressure}</p>
       <p>Сила и направление ветра: {speed}</p>
-      <p>Последнее обновление данных: {dt}</p>
+      <p>Последнее обновление: {dt}</p>
       <div className="btn">
         <button className="button" onClick={() => onDelete(id)}>
           Удалить

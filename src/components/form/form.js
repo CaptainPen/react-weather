@@ -5,56 +5,64 @@ import citys from "./citys.json";
 const Form = ({ weatherMethod, refreshAll }) => {
   const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(true);
+  const [checked, setChecked] = useState(false);
 
-  /* Устанавливаем value = значению input */
-
-  const inputValue = (event) => {
-    setValue(event.target.value);
+  const inputValue = (e) => {
+    setValue(e.target.value);
+    setIsOpen(true);
   };
-
-  /* При клике на input отрывается автодополнение */
 
   const inputClick = () => {
     setIsOpen(true);
   };
 
-  /* При клике на город автодополения заполняем input этим городом и скрываем автодополнение */
-
+  /* filling the input from auto-completion */
   const itemClick = (e) => {
     setValue(e.target.textContent);
     setIsOpen(!isOpen);
   };
 
-  /* фильтр городов, где result - это value с заглавной буквой */
-
+  /* filter cities by input */
   const filterCitys = citys.city.filter((city) => {
     const result = value.charAt(0).toUpperCase() + value.slice(1);
     return city.name.includes(result);
   });
 
+  /* creating a card with auto-completion */
+  const Add = (e) => {
+    e.preventDefault();
+    const cityName = e.target.getAttribute(`value`);
+    console.log(cityName);
+    weatherMethod(cityName);
+  };
+
+  /* creating a card with input */
+  const AppInp = (e) => {
+    e.preventDefault();
+    const cityName = e.target.elements.city.value;
+    weatherMethod(cityName);
+    console.log(cityName);
+  };
+
   return (
     <div className="searchBar">
-      <form className="form" onSubmit={weatherMethod}>
+      <form className="form" onSubmit={AppInp}>
         <input
           className="textFieldInput"
           type="text"
-          multiple
           name="city"
           placeholder="Название города"
-          list="names"
           value={value}
           onChange={inputValue}
           onClick={inputClick}
         />
-
-        {/* Вызываем автодополение поиска */}
-
-        <ul className="autocomplete" onClick={weatherMethod}>
+        <ul className="autocomplete" onClick={Add}>
           {isOpen && value && value.length > 2
-            ? filterCitys.map((citys) => {
+            ? filterCitys.map((citys, index) => {
                 return (
                   <li
                     className="autocompleteItem"
+                    key={index}
                     value={citys.name}
                     onClick={itemClick}
                   >
@@ -65,14 +73,15 @@ const Form = ({ weatherMethod, refreshAll }) => {
             : null}
         </ul>
       </form>
-
-      {/* Чекбокс */}
-      
       <div className="updateForm">
         <p>Автообновление 5с</p>
-        <input className="checkUpdate" type="checkbox"></input>
+        <input
+          className="checkUpdate"
+          type="checkbox"
+          checked={checked}
+          onChange={() => setChecked(!checked)}
+        ></input>
       </div>
-
     </div>
   );
 };
