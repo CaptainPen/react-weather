@@ -4,7 +4,7 @@ import Card from "./components/card/card";
 import "./App.css";
 
 const App = () => {
-  /* const API_KEY = "f901b49665f1c1a7425f470ce9d5cd44"; */
+
   const API_KEY = "1340c1b61c42d543c0ee862d22a1b2b5";
 
   /* assign a value to arr */
@@ -191,21 +191,20 @@ const App = () => {
     });
     setArr(updateArrData);
     setWeatherLocalStorage([...updateArrData]);
-    
   };
 
   /* updating all weather cards */
   const refreshAll = () => {
-    const updateArrData = arr.map( (item) => {
+    const updateArrData = arr.map((item) => {
       const weather = gettingWeather(item.city);
-      return weather; 
+      return weather;
     });
     Promise.all(updateArrData).then((data) => {
       setArr(data);
-      setWeatherLocalStorage(data)
-    })
+      setWeatherLocalStorage(data);
+    });
   };
-  
+
   /* adding to localStorage  */
   const setWeatherLocalStorage = (weatherData) => {
     localStorage.setItem(`arr`, JSON.stringify(weatherData));
@@ -213,10 +212,7 @@ const App = () => {
 
   return (
     <div id="weatherApp" className="weatherApp">
-      <Form 
-        weatherMethod={addWeather} 
-        refreshAll={refreshAll} 
-      />
+      <Form weatherMethod={addWeather} refreshAll={refreshAll} />
       <div id="cardsContainer" className="cardsContainer">
         {arr.map((obj, index) => (
           <Card

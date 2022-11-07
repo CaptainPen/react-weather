@@ -6,7 +6,7 @@ const Form = ({ weatherMethod, refreshAll }) => {
   const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(true);
   const [checked, setChecked] = useState(false);
-  const [timerID, setTimerID] = useState()
+  const [timerID, setTimerID] = useState();
 
   const inputValue = (e) => {
     setValue(e.target.value);
@@ -45,27 +45,23 @@ const Form = ({ weatherMethod, refreshAll }) => {
 
   /* creating an auto-update interval */
   const interval = () => {
-    let idInterval = setInterval(() => refreshAll(), 5000)
-    setTimerID(idInterval)
-  }
+    let idInterval = setInterval(() => refreshAll(), 5000);
+    setTimerID(idInterval);
+  };
 
   /* delete interval */
   const deleteInterval = () => {
-    clearInterval(timerID)
-  }
+    clearInterval(timerID);
+  };
 
   /* checking the checkbox */
   const check = () => {
-    if(!checked) {
-      interval()
+    if (!checked) {
+      interval();
     } else {
-      deleteInterval()
+      deleteInterval();
     }
-  }
- 
-  
-
-
+  };
 
   return (
     <div className="searchBar">
@@ -101,7 +97,6 @@ const Form = ({ weatherMethod, refreshAll }) => {
         <p>Автообновление 5с</p>
         <input
           type="checkbox"
-          id="x"
           checked={checked}
           onChange={() => setChecked(!checked)}
           onClick={check}
