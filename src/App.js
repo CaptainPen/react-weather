@@ -174,7 +174,7 @@ const App = () => {
   };
 
   /* deleting the weather card */
-  const handleClickDelete = (id) => {
+  const clickDelete = (id) => {
     const filterArr = arr.filter((obj) => obj.id !== id);
     setWeatherLocalStorage(filterArr);
     setArr(filterArr);
@@ -183,6 +183,7 @@ const App = () => {
   /* updating the weather card */
   const refresh = async (city) => {
     const updateWeather = await gettingWeather(city);
+    console.log(city)
     const updateArrData = arr.map((item) => {
       if (item.city == city) {
         item = updateWeather;
@@ -198,7 +199,6 @@ const App = () => {
     const updateArrData = await arr.map((item) => {
       console.log(`Обновление для ${item.city}`);
       refresh(item.city);
-      setWeatherLocalStorage(updateArrData);
     });
   };
   
@@ -209,14 +209,17 @@ const App = () => {
 
   return (
     <div id="weatherApp" className="weatherApp">
-      <Form weatherMethod={addWeather} refreshAll={refreshAll} />
+      <Form 
+        weatherMethod={addWeather} 
+        refreshAll={refreshAll} 
+      />
       <div id="cardsContainer" className="cardsContainer">
         {arr.map((obj, index) => (
           <Card
             key={index}
             obj={obj}
             refresh={refresh}
-            onDelete={handleClickDelete}
+            onDelete={clickDelete}
           />
         ))}
       </div>

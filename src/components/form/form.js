@@ -29,26 +29,25 @@ const Form = ({ weatherMethod, refreshAll }) => {
   });
 
   /* creating a card with auto-completion */
-  const Add = (e) => {
+  const itemAdd = (e) => {
     e.preventDefault();
     const cityName = e.target.getAttribute(`value`);
-    console.log(cityName);
     weatherMethod(cityName);
   };
 
   /* creating a card with input */
-  const AppInp = (e) => {
+  const inputAdd = (e) => {
     e.preventDefault();
     const cityName = e.target.elements.city.value;
     weatherMethod(cityName);
-    console.log(cityName);
   };
 
   return (
     <div className="searchBar">
-      <form className="form" onSubmit={AppInp}>
+      <form className="form" onSubmit={inputAdd}>
         <input
           className="textFieldInput"
+          autocomplete="off"
           type="text"
           name="city"
           placeholder="Название города"
@@ -56,7 +55,7 @@ const Form = ({ weatherMethod, refreshAll }) => {
           onChange={inputValue}
           onClick={inputClick}
         />
-        <ul className="autocomplete" onClick={Add}>
+        <ul className="autocomplete" onClick={itemAdd}>
           {isOpen && value && value.length > 2
             ? filterCitys.map((citys, index) => {
                 return (
@@ -80,6 +79,7 @@ const Form = ({ weatherMethod, refreshAll }) => {
           type="checkbox"
           checked={checked}
           onChange={() => setChecked(!checked)}
+          onClick={refreshAll}
         ></input>
       </div>
     </div>
