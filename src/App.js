@@ -183,23 +183,27 @@ const App = () => {
   /* updating the weather card */
   const refresh = async (city) => {
     const updateWeather = await gettingWeather(city);
-    console.log(city)
     const updateArrData = arr.map((item) => {
       if (item.city == city) {
         item = updateWeather;
       }
       return item;
     });
-    setWeatherLocalStorage(updateArrData);
     setArr(updateArrData);
+    setWeatherLocalStorage([...updateArrData]);
+    
   };
 
   /* updating all weather cards */
-  const refreshAll = async () => {
-    const updateArrData = await arr.map((item) => {
-      console.log(`Обновление для ${item.city}`);
-      refresh(item.city);
+  const refreshAll = () => {
+    const updateArrData = arr.map( (item) => {
+      const weather = gettingWeather(item.city);
+      return weather; 
     });
+    Promise.all(updateArrData).then((data) => {
+      setArr(data);
+      setWeatherLocalStorage(data)
+    })
   };
   
   /* adding to localStorage  */
