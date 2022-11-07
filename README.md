@@ -29,7 +29,8 @@ For each item from the list is displayed:
  ### Application:
  
  - Locally stores a list of monitored cities (local-storage);
- - Stores a local cache of weather data in monitored cities (local-storage).
+ - Stores a local cache of weather data in monitored cities (local-storage);
+ - Periodically updates weather data in tracked cities. 
  
  List of cities `city.json` is connected locally and stored in the project folder. An open API is used as a data source: https://openweathermap.org.
  
