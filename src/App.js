@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "./components/form/form";
 import Card from "./components/card/card";
+import Widget from "./components/widget/widget";
 import "./App.css";
 
 const App = () => {
@@ -9,15 +10,38 @@ const App = () => {
 
   /* assign a value to arr */
   const [arr, setArr] = useState(JSON.parse(localStorage.getItem(`arr`)) || []);
+  /* const [tempArr, setTempArr] = useState(JSON.parse(localStorage.getItem(`arr`)) || []) */
+  const [max, setMax] = useState('')
+  const [min, setMin] = useState('')
+
 
   const addWeather = async (e) => {
     const cityName = e;
     const weatherData = await gettingWeather(cityName); /* get weather data for the city */
     arr.push(weatherData); /* add data to arr */
-    arr.sort((a, b) => b.tempRange - a.tempRange); /* sort by temperature for the widget */
+    /* arr.sort((a, b) => b.tempRange - a.tempRange); */ /* sort by temperature for the widget */
     setArr([...arr]);
     setWeatherLocalStorage(arr);
+    tempMaxMin()
   };
+
+  const tempMaxMin = () => {
+    let tempArr = arr
+      tempArr.sort((a, b) => b.tempRange - a.tempRange);
+      setMax(tempArr[0])
+      setMin(tempArr.slice(-1)[0])
+  }
+
+
+  useEffect(() => {
+    if (arr.length == 0) {
+        console.log(`пусто`)
+    } else {
+      tempMaxMin()
+    }
+  });
+  
+  
 
   const gettingWeather = async (cityName) => {
     const city = cityName;
@@ -175,7 +199,7 @@ const App = () => {
 
   /* deleting the weather card */
   const clickDelete = (id) => {
-    const filterArr = arr.filter((obj) => obj.id !== id);
+    const filterArr = arr.filter((obj) => obj.id !== id); 
     setWeatherLocalStorage(filterArr);
     setArr(filterArr);
   };
@@ -191,6 +215,7 @@ const App = () => {
     });
     setArr(updateArrData);
     setWeatherLocalStorage([...updateArrData]);
+    tempMaxMin()
   };
 
   /* updating all weather cards */
@@ -212,6 +237,10 @@ const App = () => {
 
   return (
     <div id="weatherApp" className="weatherApp">
+      <Widget 
+        max={max}
+        min={min}
+      />
       <Form weatherMethod={addWeather} refreshAll={refreshAll} />
       <div id="cardsContainer" className="cardsContainer">
         {arr.map((obj, index) => (
