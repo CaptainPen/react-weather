@@ -10,21 +10,20 @@ const App = () => {
 
   /* assign a value to arr */
   const [arr, setArr] = useState(JSON.parse(localStorage.getItem(`arr`)) || []);
-  /* const [tempArr, setTempArr] = useState(JSON.parse(localStorage.getItem(`arr`)) || []) */
   const [max, setMax] = useState('')
   const [min, setMin] = useState('')
-
 
   const addWeather = async (e) => {
     const cityName = e;
     const weatherData = await gettingWeather(cityName); /* get weather data for the city */
     arr.push(weatherData); /* add data to arr */
-    /* arr.sort((a, b) => b.tempRange - a.tempRange); */ /* sort by temperature for the widget */
+    arr.sort((a, b) => b.tempRange - a.tempRange); /* sort by temperature for the widget */
     setArr([...arr]);
     setWeatherLocalStorage(arr);
     tempMaxMin()
   };
 
+  /* maximum and minimum temperatures */
   const tempMaxMin = () => {
     let tempArr = arr
       tempArr.sort((a, b) => b.tempRange - a.tempRange);
@@ -32,17 +31,13 @@ const App = () => {
       setMin(tempArr.slice(-1)[0])
   }
 
-
+  /* displaying the widget when rendering */
   useEffect(() => {
-    if (arr.length == 0) {
-        console.log(`пусто`)
-    } else {
+    if (arr.length !== 0) {
       tempMaxMin()
     }
   });
   
-  
-
   const gettingWeather = async (cityName) => {
     const city = cityName;
     let weatherIcon = "";
@@ -220,6 +215,8 @@ const App = () => {
 
   /* updating all weather cards */
   const refreshAll = () => {
+    console.log(`начало`)
+    console.log(arr)
     const updateArrData = arr.map((item) => {
       const weather = gettingWeather(item.city);
       return weather;
@@ -227,6 +224,8 @@ const App = () => {
     Promise.all(updateArrData).then((data) => {
       setArr(data);
       setWeatherLocalStorage(data);
+      console.log(`конец`)
+      console.log(arr)
     });
   };
 
