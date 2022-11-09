@@ -215,8 +215,6 @@ const App = () => {
 
   /* updating all weather cards */
   const refreshAll = () => {
-    console.log(`начало`)
-    console.log(arr)
     const updateArrData = arr.map((item) => {
       const weather = gettingWeather(item.city);
       return weather;
@@ -224,8 +222,6 @@ const App = () => {
     Promise.all(updateArrData).then((data) => {
       setArr(data);
       setWeatherLocalStorage(data);
-      console.log(`конец`)
-      console.log(arr)
     });
   };
 
